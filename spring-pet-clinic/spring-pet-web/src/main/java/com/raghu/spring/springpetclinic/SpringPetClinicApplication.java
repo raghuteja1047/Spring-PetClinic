@@ -1,4 +1,4 @@
-package com.raghu.spring.springpetclinic.web;
+package com.raghu.spring.springpetclinic;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

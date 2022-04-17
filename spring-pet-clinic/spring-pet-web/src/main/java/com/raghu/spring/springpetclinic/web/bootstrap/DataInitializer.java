@@ -1,5 +1,7 @@
 package com.raghu.spring.springpetclinic.web.bootstrap;
 
+import java.util.Collections;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -11,9 +13,9 @@ import com.raghu.spring.springpetclinic.services.PetService;
 @Component
 public class DataInitializer implements CommandLineRunner {
 
-	@Autowired
+	
 	private final OwnerService ownerService;
-	@Autowired
+	
 	private final PetService petService;
 	
 	public DataInitializer(OwnerService ownerService, PetService petService) {
@@ -36,6 +38,9 @@ public class DataInitializer implements CommandLineRunner {
 		Owner o3 = new Owner();
 		o3.setFirstName("Santhi");
 		o3.setLastName("Priya");
+	
+		
+		
 	}
 
 }
