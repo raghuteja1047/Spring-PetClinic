@@ -1,12 +1,40 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" >
-<head>
-<meta charset="ISO-8859-1" >
-<title>Insert title here</title>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<style>
+table {
+	font-family: arial, sans-serif;
+	border-collapse: collapse;
+	width: 100%;
+}
+
+td, th {
+	border: 1px solid #dddddd;
+	text-align: left;
+	padding: 8px;
+}
+
+tr:nth-child(even) {
+	background-color: #dddddd;
+}
+</style>
 </head>
 <body>
+
 	<h2>Welcome to RS Pet Clinic Services - Owners Page.</h2>
-	<hr>
-	
+
+	<table>
+		<tr>
+			<th>ID</th>
+			<th>First Name</th>
+			<th>Last Name</th>
+		</tr>
+		<tr th:each="owner : ${owners}">
+			<td th:text="${owner.id}">1</td>
+			<td th:text="${owner.firstName}">Joe</td>
+			<td th:text="${owner.lastName}">Buck</td>
+		</tr>
+	</table>
+
 </body>
 </html>
+
