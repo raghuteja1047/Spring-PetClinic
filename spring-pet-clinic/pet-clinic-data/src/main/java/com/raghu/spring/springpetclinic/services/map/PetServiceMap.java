@@ -8,7 +8,7 @@ import com.raghu.spring.springpetclinic.model.Pet;
 import com.raghu.spring.springpetclinic.services.PetService;
 
 @Service
-public class PetMapService extends AbstractMapService<Pet, Long> implements PetService {
+public class PetServiceMap extends AbstractServiceMap<Pet, Long> implements PetService {
 
 	@Override
 	public void delete(Pet o) {

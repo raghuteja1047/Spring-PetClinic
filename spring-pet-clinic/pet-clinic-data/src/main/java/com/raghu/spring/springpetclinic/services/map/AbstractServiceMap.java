@@ -9,7 +9,7 @@ import java.util.Set;
 
 import com.raghu.spring.springpetclinic.model.BaseEntity;
 
-public abstract class AbstractMapService<T extends BaseEntity, ID extends Long> {
+public abstract class AbstractServiceMap<T extends BaseEntity, ID extends Long> {
 
 	Map<ID, T> map = new HashMap<ID, T>();
 

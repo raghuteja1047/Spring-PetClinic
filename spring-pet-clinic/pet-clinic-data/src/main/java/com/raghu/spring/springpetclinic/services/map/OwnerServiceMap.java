@@ -8,7 +8,7 @@ import com.raghu.spring.springpetclinic.model.Owner;
 import com.raghu.spring.springpetclinic.services.OwnerService;
 
 @Service
-public class OwnerServiceMap extends AbstractMapService<Owner, Long> implements OwnerService {
+public class OwnerServiceMap extends AbstractServiceMap<Owner, Long> implements OwnerService {
 	
 	@Override
 	public Owner findByLastName(String lname) {

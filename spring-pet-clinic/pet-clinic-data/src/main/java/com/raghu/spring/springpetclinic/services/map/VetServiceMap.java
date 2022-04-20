@@ -8,7 +8,7 @@ import com.raghu.spring.springpetclinic.model.Vet;
 import com.raghu.spring.springpetclinic.services.VetService;
 
 @Service
-public class VetServiceMap extends AbstractMapService<Vet, Long> implements VetService {
+public class VetServiceMap extends AbstractServiceMap<Vet, Long> implements VetService {
 	@Override
 	public void delete(Vet o) {
 		// TODO Auto-generated method stub
