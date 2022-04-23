@@ -15,6 +15,12 @@ public class SpecialityServiceJPA implements SpecialitiesService {
 
 	SpecialityRepository repository;
 
+	
+	public SpecialityServiceJPA(SpecialityRepository repository) {
+		super();
+		this.repository = repository;
+	}
+
 	@Override
 	public Speciality findById(Long id) {
 		return repository.findById(id).orElse(null);

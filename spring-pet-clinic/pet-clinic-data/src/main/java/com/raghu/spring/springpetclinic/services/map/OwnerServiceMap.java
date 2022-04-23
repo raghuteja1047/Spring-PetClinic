@@ -2,6 +2,7 @@ package com.raghu.spring.springpetclinic.services.map;
 
 import java.util.Set;
 
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import com.raghu.spring.springpetclinic.model.Owner;
@@ -11,6 +12,7 @@ import com.raghu.spring.springpetclinic.services.PetService;
 import com.raghu.spring.springpetclinic.services.PetTypeService;
 
 @Service
+@Profile({"default", "map"})
 public class OwnerServiceMap extends AbstractServiceMap<Owner, Long> implements OwnerService {
 
 	PetTypeService petTypeService;
@@ -36,6 +38,8 @@ public class OwnerServiceMap extends AbstractServiceMap<Owner, Long> implements 
 	@Override
 	public Set<Owner> findAll() {
 		// TODO Auto-generated method stub
+		System.out.println("MAP MAP");
+		System.out.println(super.findAll().size());
 		return super.findAll();
 	}
 

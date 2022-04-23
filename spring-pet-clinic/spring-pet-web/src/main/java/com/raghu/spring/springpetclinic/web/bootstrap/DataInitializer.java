@@ -10,10 +10,12 @@ import com.raghu.spring.springpetclinic.model.Pet;
 import com.raghu.spring.springpetclinic.model.PetType;
 import com.raghu.spring.springpetclinic.model.Speciality;
 import com.raghu.spring.springpetclinic.model.Vet;
+import com.raghu.spring.springpetclinic.model.Visit;
 import com.raghu.spring.springpetclinic.services.OwnerService;
 import com.raghu.spring.springpetclinic.services.PetTypeService;
 import com.raghu.spring.springpetclinic.services.SpecialitiesService;
 import com.raghu.spring.springpetclinic.services.VetService;
+import com.raghu.spring.springpetclinic.services.VisitService;
 
 @Component
 public class DataInitializer implements CommandLineRunner {
@@ -26,22 +28,27 @@ public class DataInitializer implements CommandLineRunner {
 
 	private final SpecialitiesService specialitiesService;
 
+	private final VisitService visitService;
+
 	public DataInitializer(OwnerService ownerService, VetService vetService, PetTypeService petTypeService,
-			SpecialitiesService specialitiesService) {
+			SpecialitiesService specialitiesService, VisitService visitService) {
 		super();
 		this.ownerService = ownerService;
 		this.vetService = vetService;
 		this.petTypeService = petTypeService;
 		this.specialitiesService = specialitiesService;
+		this.visitService = visitService;
 	}
 
 	@Override
 	public void run(String... args) throws Exception {
 
-		if (petTypeService.findAll().size() > 0) {
-			loadData();	
+		if (petTypeService.findAll().size() <= 0) {
+			System.out.println("===================== Data Initializing Begins =====================");
+			loadData();
+			System.out.println("===================== Data Initializing Ends =====================");
 		}
-		
+
 	}
 
 	private void loadData() {
@@ -82,19 +89,21 @@ public class DataInitializer implements CommandLineRunner {
 		rajenderPet.setOwner(o2);
 		o2.getPets().add(rajenderPet);
 
+		Pet santhiPet = new Pet();
+		santhiPet.setName("Lucky Bowww");
+		santhiPet.setBirthDate(LocalDate.now());
+		santhiPet.setPetType(dog);
+
+		
 		Owner o3 = new Owner();
 		o3.setFirstName("Santhi");
 		o3.setLastName("Priya");
 		o3.setCity("Nellore");
 		o3.setAddress("Rebala Vari Street");
 		o3.setTelephone("9686754515");
-
+		santhiPet.setOwner(o3);
+		o3.getPets().add(santhiPet);
 		System.out.println("Loading owners ...");
-		
-		Pet santhiPet = new Pet();
-		santhiPet.setName("Lucky Bow");
-		santhiPet.setBirthDate(LocalDate.now());
-		santhiPet.setPetType(dog);
 
 		ownerService.save(o1);
 		ownerService.save(o2);
@@ -132,8 +141,17 @@ public class DataInitializer implements CommandLineRunner {
 		vetService.save(v1);
 		vetService.save(v2);
 		vetService.save(v3);
-		
+
 		System.out.println("Loading Vets ...");
+
+		Visit catVisit = new Visit();
+		catVisit.setPet(rajenderPet);
+		catVisit.setDate(LocalDate.now());
+		catVisit.setDescription("Sneezy Meow");
+
+		visitService.save(catVisit);
+
+		System.out.println("Loadding Visits ... 	");
 	}
 
 }

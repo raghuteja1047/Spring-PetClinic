@@ -41,6 +41,7 @@ public class OwnerServiceJPA implements OwnerService{
 
 	@Override
 	public Set<Owner> findAll() {
+		System.out.println("JPA JPA");
 		Set<Owner> owners = new HashSet<Owner>();
 		ownerRepository.findAll().iterator().forEachRemaining(owners::add);;
 		return owners;
