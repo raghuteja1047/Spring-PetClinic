@@ -8,9 +8,11 @@ import org.springframework.stereotype.Component;
 import com.raghu.spring.springpetclinic.model.Owner;
 import com.raghu.spring.springpetclinic.model.Pet;
 import com.raghu.spring.springpetclinic.model.PetType;
+import com.raghu.spring.springpetclinic.model.Speciality;
 import com.raghu.spring.springpetclinic.model.Vet;
 import com.raghu.spring.springpetclinic.services.OwnerService;
 import com.raghu.spring.springpetclinic.services.PetTypeService;
+import com.raghu.spring.springpetclinic.services.SpecialitiesService;
 import com.raghu.spring.springpetclinic.services.VetService;
 
 @Component
@@ -22,16 +24,27 @@ public class DataInitializer implements CommandLineRunner {
 
 	private final PetTypeService petTypeService;
 
-	public DataInitializer(OwnerService ownerService, VetService vetService, PetTypeService petTypeService) {
+	private final SpecialitiesService specialitiesService;
+
+	public DataInitializer(OwnerService ownerService, VetService vetService, PetTypeService petTypeService,
+			SpecialitiesService specialitiesService) {
 		super();
 		this.ownerService = ownerService;
 		this.vetService = vetService;
 		this.petTypeService = petTypeService;
+		this.specialitiesService = specialitiesService;
 	}
 
 	@Override
 	public void run(String... args) throws Exception {
 
+		if (petTypeService.findAll().size() > 0) {
+			loadData();	
+		}
+		
+	}
+
+	private void loadData() {
 		PetType dog = new PetType();
 		dog.setName("Dog");
 
@@ -76,14 +89,29 @@ public class DataInitializer implements CommandLineRunner {
 		o3.setAddress("Rebala Vari Street");
 		o3.setTelephone("9686754515");
 
+		System.out.println("Loading owners ...");
+		
 		Pet santhiPet = new Pet();
 		santhiPet.setName("Lucky Bow");
 		santhiPet.setBirthDate(LocalDate.now());
 		santhiPet.setPetType(dog);
-		
+
 		ownerService.save(o1);
 		ownerService.save(o2);
 		ownerService.save(o3);
+
+		Speciality radiology = new Speciality();
+		radiology.setDescription("Radiologist");
+
+		Speciality surgery = new Speciality();
+		surgery.setDescription("Surgen");
+
+		Speciality dentistry = new Speciality();
+		dentistry.setDescription("Dentistry");
+
+		specialitiesService.save(radiology);
+		specialitiesService.save(dentistry);
+		specialitiesService.save(surgery);
 
 		Vet v1 = new Vet();
 		Vet v2 = new Vet();
@@ -97,9 +125,15 @@ public class DataInitializer implements CommandLineRunner {
 		v2.setLastName("Kumar");
 		v3.setLastName("Koma");
 
+		v1.getSpecialities().add(surgery);
+		v2.getSpecialities().add(radiology);
+		v3.getSpecialities().add(dentistry);
+
 		vetService.save(v1);
 		vetService.save(v2);
 		vetService.save(v3);
+		
+		System.out.println("Loading Vets ...");
 	}
 
 }

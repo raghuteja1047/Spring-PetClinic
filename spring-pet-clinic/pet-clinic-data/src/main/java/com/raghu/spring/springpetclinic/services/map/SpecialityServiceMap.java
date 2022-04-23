@@ -4,25 +4,25 @@ import java.util.Set;
 
 import org.springframework.stereotype.Service;
 
-import com.raghu.spring.springpetclinic.model.PetType;
-import com.raghu.spring.springpetclinic.services.PetTypeService;
+import com.raghu.spring.springpetclinic.model.Speciality;
+import com.raghu.spring.springpetclinic.services.SpecialitiesService;
 @Service
-public class PetTypeServiceMap extends AbstractServiceMap<PetType, Long> implements PetTypeService {
-	@Override
+public class SpecialityServiceMap extends AbstractServiceMap<Speciality, Long> implements SpecialitiesService {
 
-	public Set<PetType> findAll() {
+	@Override
+	public Speciality save(Speciality o) {
 		// TODO Auto-generated method stub
-		return super.findAll();
+		return super.save(o);
 	}
 
 	@Override
-	public PetType findById(Long id) {
+	public Speciality findById(Long id) {
 		// TODO Auto-generated method stub
 		return super.findById(id);
 	}
 
 	@Override
-	public void delete(PetType o) {
+	public void delete(Speciality o) {
 		// TODO Auto-generated method stub
 		super.delete(o);
 	}
@@ -34,9 +34,9 @@ public class PetTypeServiceMap extends AbstractServiceMap<PetType, Long> impleme
 	}
 
 	@Override
-	public PetType save(PetType o) {
+	public Set<Speciality> findAll() {
 		// TODO Auto-generated method stub
-		return super.save(o);
+		return super.findAll();
 	}
 
 }
