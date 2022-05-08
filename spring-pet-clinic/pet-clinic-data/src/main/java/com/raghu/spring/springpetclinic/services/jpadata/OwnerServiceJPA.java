@@ -1,6 +1,7 @@
 package com.raghu.spring.springpetclinic.services.jpadata;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.context.annotation.Profile;
@@ -11,16 +12,15 @@ import com.raghu.spring.springpetclinic.repo.OwnerRepository;
 import com.raghu.spring.springpetclinic.repo.PetRepository;
 import com.raghu.spring.springpetclinic.repo.PetTypeRepository;
 import com.raghu.spring.springpetclinic.services.OwnerService;
+
 @Service
 @Profile("SpringJPA")
-public class OwnerServiceJPA implements OwnerService{
-	
+public class OwnerServiceJPA implements OwnerService {
+
 	OwnerRepository ownerRepository;
 	PetTypeRepository petTypeRepository;
 	PetRepository petRepository;
-	
-	
-	
+
 	public OwnerServiceJPA(OwnerRepository ownerRepository, PetTypeRepository petTypeRepository,
 			PetRepository petRepository) {
 		super();
@@ -43,7 +43,8 @@ public class OwnerServiceJPA implements OwnerService{
 	public Set<Owner> findAll() {
 		System.out.println("JPA JPA");
 		Set<Owner> owners = new HashSet<Owner>();
-		ownerRepository.findAll().iterator().forEachRemaining(owners::add);;
+		ownerRepository.findAll().iterator().forEachRemaining(owners::add);
+		;
 		return owners;
 	}
 
@@ -54,13 +55,17 @@ public class OwnerServiceJPA implements OwnerService{
 
 	@Override
 	public void deleteById(Long id) {
-			ownerRepository.deleteById(id);
+		ownerRepository.deleteById(id);
 	}
 
 	@Override
 	public Owner findByLastName(String lname) {
-		
-		return null;
+		return this.findAll().stream().filter(owner -> owner.getLastName().equals(lname)).findFirst().orElse(null);
+	}
+
+	@Override
+	public List<Owner> findAllByLastNameLike(String lastname) {
+		return ownerRepository.findAllByLastNameLike(lastname);
 	}
 
 }

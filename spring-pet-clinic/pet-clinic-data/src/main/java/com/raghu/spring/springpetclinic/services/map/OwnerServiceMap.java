@@ -1,5 +1,6 @@
 package com.raghu.spring.springpetclinic.services.map;
 
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.context.annotation.Profile;
@@ -12,7 +13,7 @@ import com.raghu.spring.springpetclinic.services.PetService;
 import com.raghu.spring.springpetclinic.services.PetTypeService;
 
 @Service
-@Profile({"default", "map"})
+@Profile({ "default", "map" })
 public class OwnerServiceMap extends AbstractServiceMap<Owner, Long> implements OwnerService {
 
 	PetTypeService petTypeService;
@@ -61,7 +62,7 @@ public class OwnerServiceMap extends AbstractServiceMap<Owner, Long> implements 
 					} else {
 						throw new RuntimeException("Pet Type is mandatory");
 					}
-					if(pet.getId() == null) {
+					if (pet.getId() == null) {
 						Pet SavedPet = petService.save(pet);
 						pet.setId(SavedPet.getId());
 					}
@@ -78,5 +79,10 @@ public class OwnerServiceMap extends AbstractServiceMap<Owner, Long> implements 
 	public void deleteById(Long id) {
 		// TODO Auto-generated method stub
 		super.deleteById(id);
+	}
+	
+	@Override
+	public List<Owner> findAllByLastNameLike(String lastname) {
+		return null;
 	}
 }
